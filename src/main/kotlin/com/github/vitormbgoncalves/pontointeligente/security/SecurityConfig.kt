@@ -24,6 +24,8 @@ class SecurityConfig(
 
   override fun configure(http: HttpSecurity?) {
     http?.authorizeRequests()?.
+    antMatchers("/api/cadastrar-pj", "/api/cadastrar-pf")?.
+    permitAll()?.
     anyRequest()?.
     authenticated()?.and()?.
     httpBasic()?.and()?.
