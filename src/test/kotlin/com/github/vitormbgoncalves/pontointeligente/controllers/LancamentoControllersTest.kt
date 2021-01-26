@@ -11,6 +11,7 @@ import com.github.vitormbgoncalves.pontointeligente.services.FuncionarioService
 import com.github.vitormbgoncalves.pontointeligente.services.LancamentoService
 import com.github.vitormbgoncalves.pontointeligente.utils.SenhaUtils
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.BDDMockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -18,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
@@ -25,6 +27,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.text.SimpleDateFormat
 import java.util.*
 
+@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class LancamentoControllersTest {
@@ -48,6 +51,7 @@ class LancamentoControllersTest {
 
   @Test
   @Throws(Exception::class)
+  @WithMockUser
   fun testCadastrarLancamento() {
     val lancamento: Lancamento = obterDadosLancamento()
 
@@ -70,6 +74,7 @@ class LancamentoControllersTest {
 
   @Test
   @Throws(Exception::class)
+  @WithMockUser
   fun testeCadastrarLancamentoFuncionarioInvalido() {
 
     BDDMockito.given<Funcionario>(funcionarioService?.buscarPorId(idFuncionario))
@@ -79,6 +84,7 @@ class LancamentoControllersTest {
       .content(obterJsonRequisicaoPost())
       .contentType(MediaType.APPLICATION_JSON)
       .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest)
       .andExpect(jsonPath("$.erros")
         .value("Funcionário não encontrado. ID inexistente."))
       .andExpect(jsonPath("$.data").isEmpty())
@@ -86,7 +92,7 @@ class LancamentoControllersTest {
 
   @Test
   @Throws(Exception::class)
-  @WithMockUser(username = "admin@admin.com", roles = arrayOf("ADMIN"))
+  @WithMockUser(username = "admin@admin.com", roles = arrayOf("Admin"))
   fun testRemoverLancamento() {
     BDDMockito.given<Lancamento>(lancamentoService?.buscarPorId(idLancamento))
       .willReturn(obterDadosLancamento())

@@ -128,7 +128,7 @@ class LancamentoController (val lancamentoService: LancamentoService,
     val funcionario: Funcionario? = funcionarioService.buscarPorId(lancamentoDto.funcionarioId)
     if(funcionario == null) {
       result.addError(ObjectError("funcionario",
-        "Funcioário não encontrado. ID inexistente."))
+        "Funcionário não encontrado. ID inexistente."))
     }
   }
 
@@ -148,7 +148,7 @@ class LancamentoController (val lancamentoService: LancamentoService,
     }
 
     return Lancamento(dateFormat.parse(lancamentoDto.data), TipoEnum.valueOf(lancamentoDto.tipo!!),
-      lancamentoDto.funcionarioId!!, lancamentoDto.descrição,
-      lancamentoDto.localização, lancamentoDto.id)
+      lancamentoDto.funcionarioId!!, lancamentoDto.descricao,
+      lancamentoDto.localizacao, lancamentoDto.id)
   }
 }

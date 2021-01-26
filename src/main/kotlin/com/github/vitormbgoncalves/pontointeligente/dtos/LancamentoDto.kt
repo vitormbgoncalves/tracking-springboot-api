@@ -9,8 +9,8 @@ class LancamentoDto (
   @get:NotEmpty(message = "Tipo não pode ser vazio.")
   val tipo: String? = null,
 
-  val descrição: String? = null,
-  val localização: String? = null,
+  val descricao: String? = null,
+  val localizacao: String? = null,
   val funcionarioId: String? = null,
   var id: String? = null
 )
