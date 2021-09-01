@@ -16,7 +16,7 @@ The code consists of Rest Web Services built with Kotlin, Spring Boot and MySQL.
 - [**MongoDB**](https://www.mongodb.com/) - for database;
 - [**Embedded MongoDB**](https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo) - for mongo database integration and unit test;
 - [**Spring Security**](https://spring.io/projects/spring-security) - for authentication and access-control;
-- [**Postman**](https://www.postman.com/) - for API development testing;
+- [**Postman**](https://www.postman.com/) - for API development testing.
 
 ## 📀 Running
 
